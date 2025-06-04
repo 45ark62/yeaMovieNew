@@ -1,0 +1,48 @@
+.films__item {
+  width: 160px;
+  height: 280px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.card__poster {
+  border-radius: 20px;
+}
+.card__title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.card__poster {
+  width: 160px;
+  height: 240px;
+}
+.card__rating {
+  background-color: #1e88e5;
+
+  color: #fff;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+
+  padding: 4px 6px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.favorite{
+   position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+
+.films__item:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  
+}

@@ -1,0 +1,16 @@
+.header__search{
+  background-color: #0F0F0F;
+  border: 3px solid #1F1F1F;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.header__button{
+  background-color: #0F0F0F;
+  border: 3px solid #1F1F1F;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.header__button:hover{
+  color:#1E88E5;
+}

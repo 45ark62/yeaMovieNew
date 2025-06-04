@@ -1,24 +1,30 @@
-import React from 'react';
-import styles from './header.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink, type NavLinkProps } from 'react-router-dom';
+import styles from '../header.module.css';
+import Search from '@features/films/search/ui/Search';
 
 function Header() {
+  const isActiveItem: NavLinkProps['className'] = ({ isActive }) =>
+    isActive ? styles.active : styles.inactive;
   return (
     <header className={styles.header}>
-      <section>
-        <img
-          width="96"
-          height="96"
-          src="https://img.icons8.com/ink/96/film-reel.png"
-          alt="film-reel"
-        />
+      <section className={styles.header__logo}>
+        <img className={styles.logo} src="/src/shared/assets/logo.png" alt="film-reel" />
         <h1>MoviePet</h1>
       </section>
-      <section>
-        <Link to="/">Главная</Link>
-        <Link to="/favorite">Избранное</Link>
-        <Link to="/history">История поиска</Link>
+      <section className={styles.header__container}>
+        <nav className={styles.header__container__nav}>
+          <NavLink to="/main" className={isActiveItem}>
+            Главная
+          </NavLink>
+          <NavLink to="/favorites" className={isActiveItem}>
+            Избранное
+          </NavLink>
+          <NavLink to="/history" className={isActiveItem}>
+            История поиска
+          </NavLink>
+        </nav>
       </section>
+      <Search />
     </header>
   );
 }

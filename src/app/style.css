@@ -95,5 +95,10 @@ input[type='file'] {
 
 body{
     background-color: #141414;
-    color: white;
+	color: #fff;
+	font-family: 'Inter', sans-serif;
+	padding: 0 80px;
+}
+a{
+	color: #fff;
 }
