@@ -263,6 +263,8 @@
   }
 .about__film{
   display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
   .person img {
     width: 70px;
@@ -274,7 +276,7 @@
     padding: 8px;
   }
 }
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .poster__info {
     align-items: center;
   }
