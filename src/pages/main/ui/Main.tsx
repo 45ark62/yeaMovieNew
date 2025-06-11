@@ -36,7 +36,7 @@ function Main() {
 
   useEffect(() => {
     if (finalIsError) {
-      toast.error(finalError?.data.message);
+      toast.error((finalError as { data: { message: string } })?.data?.message || 'Ошибка');
     }
   }, [finalError, finalIsError]);
   return (
@@ -53,7 +53,7 @@ function Main() {
             currentPage={currentPage}
             onPageChange={setCurrentPage}
           />
-          <FilmsList films={finalData?.docs} isLoading={finalIsLoading} />
+          <FilmsList films={finalData?.docs ?? []} isLoading={finalIsLoading} />
           <Pagination
             totalPages={finalData?.pages ?? 1}
             currentPage={currentPage}

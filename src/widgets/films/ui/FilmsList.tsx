@@ -5,7 +5,7 @@ import Skeleton from '@shared/ui/skeleton/Skeleton';
 
 interface FilmsListProps {
   films: Film[];
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 function FilmsList({ films, isLoading }: FilmsListProps) {
   

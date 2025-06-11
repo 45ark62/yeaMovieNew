@@ -1,4 +1,3 @@
-//import { FilmsResponse } from '@/shared/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Film } from '@shared/types';
 
@@ -9,6 +8,7 @@ interface FilmsResponse {
   total: number;
   limit: number;
   page: number;
+  pages:number;
 }
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
@@ -20,7 +20,7 @@ export const filmsApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getFilms: builder.query<FilmsResponse, string>({
+    getFilms: builder.query<FilmsResponse, number>({
       query: (page = 1) =>
         `/movie?page=${page}&limit=24` +
         `&selectFields=id` +

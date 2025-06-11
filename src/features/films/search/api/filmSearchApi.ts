@@ -10,6 +10,7 @@ interface FilmsResponse {
   limit: number;
   page: number;
   query?: string;
+  pages: number;
 }
 export const filmsBySearchApi = createApi({
   reducerPath: 'filmsBySearchApi',
