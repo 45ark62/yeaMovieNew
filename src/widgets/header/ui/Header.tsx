@@ -1,6 +1,6 @@
 import { NavLink, type NavLinkProps } from 'react-router-dom';
 import styles from '../header.module.css';
-import Search from '@features/films/search/ui/Search';
+
 
 function Header() {
   const isActiveItem: NavLinkProps['className'] = ({ isActive }) =>
@@ -19,12 +19,10 @@ function Header() {
           <NavLink to="/favorites" className={isActiveItem}>
             Избранное
           </NavLink>
-          <NavLink to="/history" className={isActiveItem}>
-            История поиска
-          </NavLink>
+         
         </nav>
       </section>
-      <Search />
+      
     </header>
   );
 }

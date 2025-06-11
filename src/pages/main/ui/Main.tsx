@@ -1,41 +1,68 @@
-import Pagination from '@features/films/pagination/ui/Pagination';
+import { useGetFilmsBySearchQuery } from '@features/films/search/api/filmSearchApi';
 import { useGetFilmsQuery } from '@widgets/films/api/filmsApi';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { Outlet } from 'react-router-dom';
+import Pagination from '@features/films/pagination/ui/Pagination';
+import Search from '@features/films/search/ui/Search';
 import FilmsList from '@widgets/films/ui/FilmsList';
-import { useState } from 'react';
 
 function Main() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading } = useGetFilmsQuery(currentPage);
-  const handleNextPage = () => {
-    if (currentPage < data?.total) {
-      setCurrentPage(currentPage + 1);
+  const [value, setValue] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const isSearchMode = searchTerm.trim() !== '';
+  const {
+    data: filmsData,
+    isLoading,
+    isError,
+    error,
+  } = useGetFilmsBySearchQuery({ page: currentPage, query: searchTerm }, { skip: !isSearchMode });
+
+  const {
+    data: allFilmsData,
+    isLoading: isLoadingAll,
+    isError: isErrorAll,
+    error: errorAll,
+  } = useGetFilmsQuery(currentPage, {
+    skip: isSearchMode,
+  });
+
+  const finalData = isSearchMode ? filmsData : allFilmsData;
+  const finalIsLoading = isSearchMode ? isLoading : isLoadingAll;
+  const finalIsError = isSearchMode ? isError : isErrorAll;
+  const finalError = isSearchMode ? error : errorAll;
+
+  useEffect(() => {
+    if (finalIsError) {
+      toast.error(finalError?.data.message);
     }
-  };
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  const handlePageClick = (page: number) => {
-    setCurrentPage(page);
-  };
+  }, [finalError, finalIsError]);
   return (
     <div>
-      <Pagination
-        totalPages={data?.pages}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-        handlePageClick={handlePageClick}
-        currentPage={currentPage}
-      />
-      <FilmsList films={data?.docs} isLoading={isLoading} />
-      <Pagination
-        totalPages={data?.pages}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-        handlePageClick={handlePageClick}
-        currentPage={currentPage}
-      />
+      <Search value={value} setValue={setValue} setSearchTerm={setSearchTerm} />
+      {isSearchMode ? <h2>Результаты поиска</h2> : <h2>Популярные фильмы</h2>}
+
+      {finalData?.docs.length === 0 ? (
+        <h1>Ничего не найдено.Проверьте поисковую строку</h1>
+      ) : (
+        <>
+          <Pagination
+            totalPages={finalData?.pages ?? 1}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
+          <FilmsList films={finalData?.docs} isLoading={finalIsLoading} />
+          <Pagination
+            totalPages={finalData?.pages ?? 1}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
+        </>
+      )}
+
+      <Outlet />
     </div>
   );
 }

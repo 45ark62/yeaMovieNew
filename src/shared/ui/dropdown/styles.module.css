@@ -1,0 +1,34 @@
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #1f1f1f;
+  border: 1px solid #4e4747;
+  border-radius: 6px;
+  margin-top: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.dropdown__item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 2px solid #4e4747;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown__item:hover {
+  background-color: #f2f2f2;
+}
+.delete {
+  text-align: center;
+  cursor: pointer;
+  padding: 8px;
+}
+.delete:hover {
+  background-color: #f2f2f2;
+}

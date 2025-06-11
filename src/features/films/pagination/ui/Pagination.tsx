@@ -2,20 +2,28 @@ import styles from '../styles.module.css';
 import { DOTS, usePagination } from '@shared/hooks/usePagination';
 interface PaginationProps {
   totalPages: number;
-  handleNextPage: () => void;
-  handlePreviousPage: () => void;
-  handlePageClick: (page: number) => void;
   currentPage: number;
+  onPageChange: (page: number) => void;
 }
-function Pagination({
-  totalPages = 10,
-  handleNextPage,
-  handlePreviousPage,
-  handlePageClick,
-  currentPage,
-}: PaginationProps) {
+function Pagination({ totalPages = 10, onPageChange, currentPage }: PaginationProps) {
   const paginationRange = usePagination({ totalPages, siblingCount: 1, currentPage });
-  const lastRange = paginationRange[paginationRange.length - 1];
+  const lastPage = paginationRange[paginationRange.length - 1];
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const handlePageClick = (page: number) => {
+    onPageChange(page);
+  };
+
   return (
     <section className={styles.pagination}>
       <button className={styles.arrow} onClick={handlePreviousPage} disabled={currentPage === 1}>
@@ -36,16 +44,13 @@ function Pagination({
               key={page}
               className={`${styles.pageNumber} ${page === currentPage ? styles.active : ''}`}
               disabled={page === currentPage}
-              onClick={() => handlePageClick(page)}>
+              onClick={() => handlePageClick(page as number)}>
               {page}
             </button>
           );
         })}
       </div>
-      <button
-        className={styles.arrow}
-        onClick={handleNextPage}
-        disabled={currentPage === lastRange}>
+      <button className={styles.arrow} onClick={handleNextPage} disabled={currentPage === lastPage}>
         &raquo;
       </button>
     </section>
