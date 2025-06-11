@@ -79,7 +79,7 @@ const DetailsOfFilmModal = () => {
                       </>
                     )}
                   </button>
-                  <section>
+                  <section className={styles.about__film}>
                     <h2>О {data?.type === 'movie' ? 'Фильмe' : 'Сериалe'} </h2>
                     <p>Год производства: {data?.year}</p>
                     <p>Страна: {data?.countries.map((item) => item.name).join(', ')}</p>

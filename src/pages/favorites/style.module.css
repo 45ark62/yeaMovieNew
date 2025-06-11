@@ -5,5 +5,11 @@
     margin-top: 40px;
 }
 .container h1{
-    margin-bottom: 40px;
+
+    text-align: center;
+    font-size: 28px;
+    font-weight:700 ;
+    margin: 0;
+    padding: 8px 10px;
+
 }

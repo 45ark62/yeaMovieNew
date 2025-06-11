@@ -5,3 +5,28 @@
   grid-column-gap: 8px;
   grid-row-gap: 52px;
 }
+
+/* Планшеты (до 1024px) */
+@media (max-width: 1024px) {
+  .films {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Смартфоны (до 768px) */
+@media (max-width: 768px) {
+  .films {
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 32px;
+    place-items: center;
+  }
+}
+
+/* Очень маленькие экраны (до 480px) */
+@media (max-width: 480px) {
+  .films {
+    grid-template-columns: 1fr;
+    grid-row-gap: 28px;
+    place-items: center;
+  }
+}

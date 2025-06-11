@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import Pagination from '@features/films/pagination/ui/Pagination';
 import Search from '@features/films/search/ui/Search';
 import FilmsList from '@widgets/films/ui/FilmsList';
+import './main.css'
 
 function Main() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +43,7 @@ function Main() {
   return (
     <div>
       <Search value={value} setValue={setValue} setSearchTerm={setSearchTerm} />
-      {isSearchMode ? <h2>Результаты поиска</h2> : <h2>Популярные фильмы</h2>}
+      {isSearchMode ? <h2 >Результаты поиска</h2> : <h2>Популярные фильмы</h2>}
 
       {finalData?.docs.length === 0 ? (
         <h1>Ничего не найдено.Проверьте поисковую строку</h1>
