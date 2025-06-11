@@ -1,6 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetFilmDetailsQuery } from '../api/detailsApi';
-import { FAVORITE_SVG, UNFAVORITE_SVG } from '@shared/constants/constants';
+import {
+  FAVORITE_SVG,
+  lockBodyScroll,
+  UNFAVORITE_SVG,
+  unlockBodyScroll,
+} from '@shared/constants/constants';
 import { addFavoriteMovie, removeFavoriteMovie } from '@entities/film/model/movieFavoriteSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -11,7 +16,7 @@ import type { FilmsDeteils } from '@shared/types';
 import styles from '../styles.module.css';
 import ReactDOM from 'react-dom';
 import Slider from '@features/films/detailsModal/ui/Slider';
-
+import { useEffect } from 'react';
 
 const DetailsOfFilmModal = () => {
   const { id } = useParams();
@@ -33,6 +38,13 @@ const DetailsOfFilmModal = () => {
       dispatch(addFavoriteMovie(data));
     }
   };
+  useEffect(() => {
+    lockBodyScroll();
+
+    return () => {
+      unlockBodyScroll();
+    };
+  }, []);
 
   return ReactDOM.createPortal(
     <section className={styles.modalWrapper}>
