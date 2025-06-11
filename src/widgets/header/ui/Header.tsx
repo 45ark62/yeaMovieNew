@@ -1,4 +1,5 @@
 import { NavLink, type NavLinkProps } from 'react-router-dom';
+import logo from '@shared/assets/logo.png';
 import styles from '../header.module.css';
 
 
@@ -8,7 +9,7 @@ function Header() {
   return (
     <header className={styles.header}>
       <section className={styles.header__logo}>
-        <img className={styles.logo} src="/src/shared/assets/logo.png" alt="film-reel" />
+        <img className={styles.logo} src={logo} alt="film-reel" />
         <h1>MoviePet</h1>
       </section>
       <section className={styles.header__container}>
